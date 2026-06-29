@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gambling Detector Options</title>
+    <link rel="stylesheet" href="../styles/options.css">
+  </head>
+  <body>
+    <main class="options">
+      <header>
+        <p class="eyebrow">Settings</p>
+        <h1>Gambling Detector</h1>
+      </header>
+
+      <form id="optionsForm">
+        <section class="panel">
+          <div class="row">
+            <div>
+              <h2>Detector</h2>
+              <p>Turn scanning on or off for pages you visit.</p>
+            </div>
+            <label class="switch">
+              <input id="enabled" type="checkbox">
+              <span></span>
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Sensitivity</span>
+            <select id="sensitivity">
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </label>
+
+          <label class="check">
+            <input id="highlight" type="checkbox">
+            <span>Highlight matched words on risky pages</span>
+          </label>
+
+          <label class="check">
+            <input id="blockOverlay" type="checkbox">
+            <span>Show stronger warning on high-risk pages</span>
+          </label>
+        </section>
+
+        <section class="panel">
+          <h2>Custom keywords</h2>
+          <p>Add one keyword or phrase per line. These are counted together with the built-in gambling terms.</p>
+          <textarea id="customKeywords" rows="8" spellcheck="false" placeholder="example keyword"></textarea>
+        </section>
+
+        <footer class="actions">
+          <button type="submit">Save settings</button>
+          <button id="resetButton" class="secondary" type="button">Reset</button>
+          <span id="saveStatus" role="status"></span>
+        </footer>
+      </form>
+    </main>
+
+    <script src="options.js"></script>
+  </body>
+</html>

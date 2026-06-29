@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gambling Detector</title>
+    <link rel="stylesheet" href="../styles/popup.css">
+  </head>
+  <body>
+    <main class="popup">
+      <header class="header">
+        <div>
+          <p class="eyebrow">Page scan</p>
+          <h1>Gambling Detector</h1>
+        </div>
+        <label class="switch" title="Enable or disable detector">
+          <input id="enabledToggle" type="checkbox">
+          <span></span>
+        </label>
+      </header>
+
+      <section id="statusCard" class="status-card low">
+        <span id="riskLabel" class="risk-label">Scanning</span>
+        <strong id="scoreValue">-</strong>
+        <p id="statusText">Reading the active tab...</p>
+      </section>
+
+      <section class="details">
+        <div>
+          <span>Matches</span>
+          <strong id="matchCount">-</strong>
+        </div>
+        <div>
+          <span>Sensitivity</span>
+          <strong id="sensitivityValue">-</strong>
+        </div>
+      </section>
+
+      <section>
+        <h2>Top terms</h2>
+        <ul id="termsList" class="terms-list">
+          <li>No matches yet.</li>
+        </ul>
+      </section>
+
+      <footer class="actions">
+        <button id="rescanButton" type="button">Rescan</button>
+        <button id="optionsButton" type="button" class="secondary">Options</button>
+      </footer>
+    </main>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

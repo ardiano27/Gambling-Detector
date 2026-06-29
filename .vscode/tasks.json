@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Validate manifest",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "Get-Content manifest.json -Raw | ConvertFrom-Json | Out-Null; Write-Host 'manifest.json valid'"
+      ],
+      "group": "test",
+      "problemMatcher": []
+    }
+  ]
+}
