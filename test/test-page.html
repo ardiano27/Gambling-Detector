@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test Page - Gambling Detector</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; }
+      body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #0f1523;
+        color: #e8ecf1;
+        line-height: 1.7;
+      }
+      .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+      header { text-align: center; margin-bottom: 48px; }
+      header h1 { font-size: 28px; margin-bottom: 8px; color: #fff; }
+      header p { color: #667085; font-size: 14px; }
+      .card {
+        background: #161d2e;
+        border: 1px solid #1e2740;
+        border-radius: 12px;
+        padding: 28px;
+        margin-bottom: 20px;
+      }
+      .card h2 { font-size: 18px; margin-bottom: 6px; color: #fff; }
+      .tag {
+        display: inline-block;
+        padding: 3px 12px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .4px;
+        margin-bottom: 14px;
+      }
+      .tag.safe { background: rgba(52,211,153,.12); color: #34d399; }
+      .tag.risky { background: rgba(234,179,8,.12); color: #eab308; }
+      .tag.danger { background: rgba(239,68,68,.12); color: #ef4444; }
+      .card p { margin-bottom: 12px; font-size: 14px; color: #8896a8; }
+      .info-box {
+        background: #0f1523;
+        border: 1px solid #1e2740;
+        border-radius: 8px;
+        padding: 14px;
+        margin-top: 14px;
+        font-size: 13px;
+      }
+      .info-box strong { color: #34d399; }
+      .info-box code {
+        background: rgba(52,211,153,.08);
+        color: #34d399;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 12px;
+      }
+      hr { border: none; border-top: 1px solid #1e2740; margin: 36px 0; }
+      .url-examples {
+        display: grid;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .url-example {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        background: #0f1523;
+        border: 1px solid #1e2740;
+        border-radius: 8px;
+        font-size: 13px;
+        font-family: 'Consolas', monospace;
+        color: #c8d1dc;
+      }
+      .url-example .risk-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex: 0 0 8px;
+      }
+      .risk-dot.low { background: #34d399; }
+      .risk-dot.med { background: #eab308; }
+      .risk-dot.high { background: #ef4444; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Gambling Detector &mdash; Test Page</h1>
+        <p>Halaman ini menguji deteksi berbasis URL Analysis + Content Scanning</p>
+      </header>
+
+      <div class="card">
+        <h2>Cara Testing</h2>
+        <p>Halaman lokal ini menguji <strong>Content Analysis</strong>. Untuk menguji <strong>URL Analysis</strong>, coba buka URL contoh di bawah ini (atau URL sejenis) — extension akan menganalisis pola URL-nya.</p>
+        <div class="url-examples">
+          <div class="url-example"><span class="risk-dot low"></span> google.com — URL bersih, no signal</div>
+          <div class="url-example"><span class="risk-dot med"></span> slot-bonus.xyz — suspicious TLD + keyword</div>
+          <div class="url-example"><span class="risk-dot high"></span> situs-judi-slot-gacor-maxwin.top — banyak keyword + suspicious TLD</div>
+          <div class="url-example"><span class="risk-dot high"></span> bandar-togel-online88.club/daftar/slot — keyword di domain + path</div>
+        </div>
+      </div>
+
+      <!-- SECTION 1: CLEAN -->
+      <div class="card">
+        <h2>Section 1 &mdash; Konten Bersih</h2>
+        <span class="tag safe">Expected: LOW risk</span>
+        <p>
+          Selamat datang di portal berita teknologi Indonesia. Hari ini kita membahas
+          perkembangan terbaru di dunia artificial intelligence dan machine learning.
+          Banyak startup lokal yang mulai mengadopsi teknologi ini untuk meningkatkan
+          efisiensi operasional mereka.
+        </p>
+        <p>
+          Dalam sektor e-commerce, penggunaan rekomendasi berbasis AI telah meningkatkan
+          konversi penjualan hingga 35%. Para developer juga semakin tertarik dengan
+          framework open-source untuk membangun model prediktif.
+        </p>
+      </div>
+
+      <!-- SECTION 2: MEDIUM -->
+      <div class="card">
+        <h2>Section 2 &mdash; Konten Mencurigakan</h2>
+        <span class="tag risky">Expected: MEDIUM risk</span>
+        <p>
+          Situs ini menawarkan bonus new member untuk semua pengguna baru yang mendaftar.
+          Dapatkan freebet senilai Rp 50.000 tanpa syarat deposit. Metode pembayaran
+          tersedia melalui deposit pulsa semua operator.
+        </p>
+        <p>
+          Tersedia juga promo turnover mingguan dan rollingan untuk member setia.
+          Hubungi customer service kami untuk informasi lebih lanjut mengenai
+          withdraw dan deposit cepat.
+        </p>
+      </div>
+
+      <!-- SECTION 3: HIGH -->
+      <div class="card">
+        <h2>Section 3 &mdash; Konten Judi Berat</h2>
+        <span class="tag danger">Expected: HIGH risk</span>
+        <p>
+          Selamat datang di situs judi online terpercaya! Mainkan slot gacor hari ini
+          dan raih maxwin hingga jutaan rupiah. Kami menyediakan RTP slot tertinggi
+          dengan koleksi game slot online terlengkap dari provider ternama.
+        </p>
+        <p>
+          Nikmati juga live casino, poker online, dan taruhan bola dengan odds terbaik
+          dari sportsbook internasional. Tersedia togel online dengan pasaran lengkap
+          dan akurat. Daftar sekarang di agen slot terpercaya dan dapatkan jackpot
+          scatter x500!
+        </p>
+        <p>
+          Bola88 dan Slot88 hadir dengan link alternatif terbaru. Mainkan parlay mix
+          dengan minimal deposit pulsa 10rb. Bandar terpercaya sejak 2019 dengan
+          casino online 24 jam nonstop. Judi online tidak pernah semudah ini!
+        </p>
+      </div>
+
+      <hr>
+
+      <div class="card">
+        <h2>URL Feature Vector</h2>
+        <p>Extension mengekstrak 21 fitur dari setiap URL yang dikunjungi. Buka popup extension dan klik "Feature Vector" untuk melihat detail fitur halaman ini.</p>
+        <div class="info-box">
+          <strong>21 Features:</strong> urlLength, domainLength, pathLength, subdomainCount, dotCount, pathDepth, queryParamCount, hyphenCount, digitCount, digitRatio, specialCharCount, isHTTPS, isIPAddress, hasPort, isSuspiciousTLD, domainEntropy, urlEntropy, keywordsInDomain, keywordsInPath, keywordsTotal, domainTokenCount
+        </div>
+      </div>
+
+      <p style="text-align:center; color:#4a5568; font-size:12px; margin-top:24px;">
+        Test page for Gambling Detector Chrome Extension v0.2.0
+      </p>
+    </div>
+  </body>
+</html>

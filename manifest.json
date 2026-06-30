@@ -1,11 +1,18 @@
 {
   "manifest_version": 3,
   "name": "Gambling Detector",
-  "description": "Detects gambling-related content on web pages and warns the user.",
-  "version": "0.1.0",
+  "description": "Detects gambling websites using URL analysis and content scanning.",
+  "version": "0.2.0",
+  "icons": {
+    "16": "logo.png",
+    "32": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
   "action": {
     "default_popup": "src/popup.html",
-    "default_title": "Gambling Detector"
+    "default_title": "Gambling Detector",
+    "default_icon": "logo.png"
   },
   "background": {
     "service_worker": "src/background.js"
@@ -16,6 +23,8 @@
         "<all_urls>"
       ],
       "js": [
+        "src/detection/url-features.js",
+        "src/detection/url-analyzer.js",
         "src/detection/rule-based.js",
         "src/detection/engine.js",
         "src/content.js"

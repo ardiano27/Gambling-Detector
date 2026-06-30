@@ -3,22 +3,32 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gambling Detector Options</title>
+    <title>Gambling Detector — Settings</title>
     <link rel="stylesheet" href="../styles/options.css">
   </head>
   <body>
     <main class="options">
       <header>
-        <p class="eyebrow">Settings</p>
-        <h1>Gambling Detector</h1>
+        <div class="header-row">
+          <img src="../logo.png" alt="Logo" class="logo" width="40" height="40">
+          <div>
+            <p class="eyebrow">Settings</p>
+            <h1>Gambling Detector</h1>
+          </div>
+        </div>
       </header>
 
       <form id="optionsForm">
         <section class="panel">
+          <div class="panel-header">
+            <h2>Detection</h2>
+            <p>Control how the detector scans pages you visit.</p>
+          </div>
+
           <div class="row">
             <div>
-              <h2>Detector</h2>
-              <p>Turn scanning on or off for pages you visit.</p>
+              <span class="field-label">Enable Detector</span>
+              <span class="field-desc">Turn scanning on or off globally.</span>
             </div>
             <label class="switch">
               <input id="enabled" type="checkbox">
@@ -26,36 +36,49 @@
             </label>
           </div>
 
+          <div class="divider"></div>
+
           <label class="field">
-            <span>Sensitivity</span>
+            <span class="field-label">Sensitivity</span>
+            <span class="field-desc">Higher sensitivity triggers warnings for fewer matches.</span>
             <select id="sensitivity">
-              <option value="high">High</option>
-              <option value="medium">Medium</option>
-              <option value="low">Low</option>
+              <option value="high">High — catches more signals</option>
+              <option value="medium">Medium — balanced</option>
+              <option value="low">Low — only obvious gambling</option>
             </select>
           </label>
 
+          <div class="divider"></div>
+
           <label class="check">
             <input id="highlight" type="checkbox">
-            <span>Highlight matched words on risky pages</span>
+            <div>
+              <span class="field-label">Highlight matched words</span>
+              <span class="field-desc">Visually mark detected gambling terms on risky pages.</span>
+            </div>
           </label>
 
           <label class="check">
             <input id="blockOverlay" type="checkbox">
-            <span>Show stronger warning on high-risk pages</span>
+            <div>
+              <span class="field-label">Stronger warning overlay</span>
+              <span class="field-desc">Show a prominent warning on high-risk pages.</span>
+            </div>
           </label>
         </section>
 
         <section class="panel">
-          <h2>Custom keywords</h2>
-          <p>Add one keyword or phrase per line. These are counted together with the built-in gambling terms.</p>
-          <textarea id="customKeywords" rows="8" spellcheck="false" placeholder="example keyword"></textarea>
+          <div class="panel-header">
+            <h2>Custom Keywords</h2>
+            <p>Add your own gambling-related terms. One keyword or phrase per line. These are counted together with the built-in detection terms.</p>
+          </div>
+          <textarea id="customKeywords" rows="8" spellcheck="false" placeholder="e.g. slot gacor&#10;bandar togel&#10;judi bola"></textarea>
         </section>
 
         <footer class="actions">
           <button type="submit">Save settings</button>
-          <button id="resetButton" class="secondary" type="button">Reset</button>
-          <span id="saveStatus" role="status"></span>
+          <button id="resetButton" class="secondary" type="button">Reset to default</button>
+          <span id="saveStatus" class="save-status" role="status"></span>
         </footer>
       </form>
     </main>

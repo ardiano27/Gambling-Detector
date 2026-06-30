@@ -30,11 +30,12 @@
     style.id = STYLE_ID;
     style.textContent = `
       .${HIGHLIGHT_CLASS} {
-        background: #ffe45c !important;
-        color: #151515 !important;
+        background: rgba(239, 68, 68, .18) !important;
+        color: inherit !important;
         border-radius: 3px !important;
-        box-shadow: 0 0 0 1px rgba(126, 81, 0, 0.28) !important;
-        padding: 0 2px !important;
+        box-shadow: 0 0 0 1px rgba(239, 68, 68, .3) !important;
+        padding: 1px 3px !important;
+        border-bottom: 2px solid rgba(239, 68, 68, .5) !important;
       }
 
       #${BANNER_ID} {
@@ -42,27 +43,94 @@
         z-index: 2147483647 !important;
         right: 18px !important;
         top: 18px !important;
-        width: min(360px, calc(100vw - 36px)) !important;
+        width: min(340px, calc(100vw - 36px)) !important;
         box-sizing: border-box !important;
-        padding: 14px !important;
-        border: 1px solid rgba(120, 53, 15, 0.22) !important;
-        border-radius: 8px !important;
-        background: #fffaf0 !important;
-        color: #1f2933 !important;
-        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.22) !important;
-        font-family: Arial, Helvetica, sans-serif !important;
+        padding: 0 !important;
+        border: 1px solid rgba(255, 255, 255, .08) !important;
+        border-radius: 14px !important;
+        background: rgba(15, 21, 35, .88) !important;
+        color: #e8ecf1 !important;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, .45), 0 0 0 1px rgba(255,255,255,.04) !important;
+        font-family: 'Segoe UI', system-ui, -apple-system, sans-serif !important;
         line-height: 1.45 !important;
+        backdrop-filter: blur(16px) saturate(1.4) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(1.4) !important;
+        animation: gambling-detector-slide .35s ease !important;
+        overflow: hidden !important;
+      }
+
+      @keyframes gambling-detector-slide {
+        from { opacity: 0; transform: translateY(-10px) scale(.97); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+
+      #${BANNER_ID} .gambling-detector-bar {
+        height: 3px !important;
+        background: linear-gradient(90deg, #ef4444, #f97316, #ef4444) !important;
+        background-size: 200% 100% !important;
+        animation: gambling-detector-bar-move 2s linear infinite !important;
+      }
+
+      @keyframes gambling-detector-bar-move {
+        0% { background-position: 0% 0; }
+        100% { background-position: 200% 0; }
+      }
+
+      #${BANNER_ID} .gambling-detector-body {
+        padding: 14px 16px !important;
+      }
+
+      #${BANNER_ID} .gambling-detector-title-row {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        margin-bottom: 8px !important;
+      }
+
+      #${BANNER_ID} .gambling-detector-icon {
+        width: 28px !important;
+        height: 28px !important;
+        border-radius: 8px !important;
+        background: rgba(239, 68, 68, .15) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 14px !important;
+        flex: 0 0 28px !important;
       }
 
       #${BANNER_ID} strong {
         display: block !important;
-        margin-bottom: 4px !important;
-        font-size: 15px !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        color: #ffffff !important;
+      }
+
+      #${BANNER_ID} .gambling-detector-risk-pill {
+        display: inline-block !important;
+        padding: 2px 8px !important;
+        border-radius: 12px !important;
+        font-size: 10px !important;
+        font-weight: 800 !important;
+        text-transform: uppercase !important;
+        letter-spacing: .4px !important;
+        margin-left: auto !important;
+      }
+
+      #${BANNER_ID} .gambling-detector-risk-pill.high {
+        background: rgba(239, 68, 68, .18) !important;
+        color: #ef4444 !important;
+      }
+
+      #${BANNER_ID} .gambling-detector-risk-pill.medium {
+        background: rgba(234, 179, 8, .18) !important;
+        color: #eab308 !important;
       }
 
       #${BANNER_ID} p {
-        margin: 0 0 10px !important;
-        font-size: 13px !important;
+        margin: 0 0 12px !important;
+        font-size: 12px !important;
+        color: #8896a8 !important;
       }
 
       #${BANNER_ID} .gambling-detector-actions {
@@ -71,18 +139,23 @@
       }
 
       #${BANNER_ID} button {
-        border: 1px solid #9a3412 !important;
-        border-radius: 6px !important;
-        background: #9a3412 !important;
+        border: none !important;
+        border-radius: 8px !important;
+        background: #ef4444 !important;
         color: #ffffff !important;
         cursor: pointer !important;
-        font: 600 12px Arial, Helvetica, sans-serif !important;
-        padding: 7px 10px !important;
+        font: 600 12px 'Segoe UI', system-ui, sans-serif !important;
+        padding: 8px 14px !important;
+        transition: opacity .15s ease !important;
+      }
+
+      #${BANNER_ID} button:hover {
+        opacity: .85 !important;
       }
 
       #${BANNER_ID} button.secondary {
-        background: #ffffff !important;
-        color: #9a3412 !important;
+        background: rgba(255, 255, 255, .08) !important;
+        color: #c8d1dc !important;
       }
     `;
     document.documentElement.appendChild(style);
@@ -102,15 +175,8 @@
     if (!parent) return true;
     const tagName = parent.tagName;
     return [
-      "SCRIPT",
-      "STYLE",
-      "TEXTAREA",
-      "INPUT",
-      "SELECT",
-      "OPTION",
-      "NOSCRIPT",
-      "CODE",
-      "PRE"
+      "SCRIPT", "STYLE", "TEXTAREA", "INPUT",
+      "SELECT", "OPTION", "NOSCRIPT", "CODE", "PRE"
     ].includes(tagName) || parent.closest(`#${BANNER_ID}, .${HIGHLIGHT_CLASS}`);
   }
 
@@ -168,42 +234,47 @@
 
   function showBanner(result) {
     removeBanner();
-    if (!document.body || result.riskLevel === "low") return;
+    const riskLevel = result.combined ? result.combined.riskLevel : result.riskLevel;
+    if (!document.body || riskLevel === "low") return;
 
     injectStyles();
+
+    const totalMatches = result.content ? result.content.totalMatches : (result.totalMatches || 0);
+    const urlKeywords = result.url ? result.url.matchedKeywords.length : 0;
 
     const banner = document.createElement("aside");
     banner.id = BANNER_ID;
     banner.setAttribute("role", "alert");
     banner.innerHTML = `
-      <strong>Gambling content detected</strong>
-      <p>This page contains ${result.totalMatches} gambling-related match(es). Risk: ${result.riskLevel.toUpperCase()}.</p>
-      <div class="gambling-detector-actions">
-        <button type="button" data-action="close">Close</button>
-        <button class="secondary" type="button" data-action="toggle-highlight">Toggle highlight</button>
+      <div class="gambling-detector-bar"></div>
+      <div class="gambling-detector-body">
+        <div class="gambling-detector-title-row">
+          <span class="gambling-detector-icon">&#9888;</span>
+          <strong>Gambling Site Detected</strong>
+          <span class="gambling-detector-risk-pill ${riskLevel}">${riskLevel.toUpperCase()}</span>
+        </div>
+        <p>URL signals: ${urlKeywords} keyword(s) &middot; Content matches: ${totalMatches}</p>
+        <div class="gambling-detector-actions">
+          <button type="button" data-action="close">Dismiss</button>
+          <button class="secondary" type="button" data-action="toggle-highlight">Toggle highlight</button>
+        </div>
       </div>
     `;
 
     banner.addEventListener("click", (event) => {
       const action = event.target && event.target.dataset && event.target.dataset.action;
-      if (action === "close") {
-        banner.remove();
-      }
+      if (action === "close") banner.remove();
       if (action === "toggle-highlight") {
         if (STATE.highlighted) {
           removeHighlights();
         } else {
-          highlightTerms(STATE.result ? STATE.result.foundTerms : []);
+          const terms = STATE.result && STATE.result.content ? STATE.result.content.foundTerms : [];
+          highlightTerms(terms);
         }
       }
     });
 
     document.body.appendChild(banner);
-  }
-
-  function showBlockOverlay(result) {
-    if (!STATE.settings.blockOverlay || result.riskLevel !== "high") return;
-    showBanner(result);
   }
 
   function notifyResult(result) {
@@ -215,10 +286,7 @@
 
   async function loadSettings() {
     const stored = await chrome.storage.sync.get("settings");
-    STATE.settings = {
-      ...DEFAULT_SETTINGS,
-      ...(stored.settings || {})
-    };
+    STATE.settings = { ...DEFAULT_SETTINGS, ...(stored.settings || {}) };
     return STATE.settings;
   }
 
@@ -229,46 +297,42 @@
 
     if (!settings.enabled || !document.body) {
       STATE.result = {
-        enabled: settings.enabled,
+        enabled: false,
         url: location.href,
         title: document.title,
-        score: 0,
-        riskLevel: "low",
-        foundTerms: [],
-        totalMatches: 0,
-        scannedTextLength: 0,
-        confidence: 0,
-        engineUsed: "none"
+        combined: { score: 0, riskLevel: "low", confidence: 0, engineUsed: "none" },
+        url_analysis: null,
+        content: null
       };
       notifyResult(STATE.result);
       return STATE.result;
     }
 
+    const pageURL = location.href;
     const pageText = document.body.innerText || "";
-    const detection = Engine.analyze(pageText, settings);
+    const analysis = Engine.analyzeCombined(pageURL, pageText, settings);
 
     const result = {
-      enabled: settings.enabled,
-      url: location.href,
+      enabled: true,
+      url: pageURL,
       title: document.title,
-      score: detection.score,
-      riskLevel: detection.riskLevel,
-      foundTerms: detection.foundTerms,
-      totalMatches: detection.totalMatches,
       scannedTextLength: pageText.length,
-      confidence: detection.confidence,
-      engineUsed: detection.engineUsed
+      combined: analysis.combined,
+      url_analysis: analysis.url,
+      content: analysis.content
     };
 
     STATE.result = result;
 
-    if (settings.highlight && result.riskLevel !== "low") {
-      highlightTerms(result.foundTerms);
+    if (settings.highlight && analysis.combined.riskLevel !== "low") {
+      highlightTerms(analysis.content.foundTerms || []);
     }
 
-    if (result.riskLevel !== "low") {
-      showBanner(result);
-      showBlockOverlay(result);
+    if (analysis.combined.riskLevel !== "low") {
+      showBanner({ combined: analysis.combined, url: analysis.url, content: analysis.content });
+      if (STATE.settings.blockOverlay && analysis.combined.riskLevel === "high") {
+        showBanner({ combined: analysis.combined, url: analysis.url, content: analysis.content });
+      }
     }
 
     notifyResult(result);
@@ -299,26 +363,16 @@
   let scanTimer = null;
   const observer = new MutationObserver(() => {
     clearTimeout(scanTimer);
-    scanTimer = setTimeout(() => {
-      scanPage();
-    }, 1200);
+    scanTimer = setTimeout(() => { scanPage(); }, 1200);
   });
 
   if (document.body) {
     scanPage();
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-      characterData: true
-    });
+    observer.observe(document.body, { childList: true, subtree: true, characterData: true });
   } else {
     document.addEventListener("DOMContentLoaded", () => {
       scanPage();
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-        characterData: true
-      });
+      observer.observe(document.body, { childList: true, subtree: true, characterData: true });
     }, { once: true });
   }
 })();

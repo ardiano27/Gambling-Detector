@@ -9,9 +9,12 @@
   <body>
     <main class="popup">
       <header class="header">
-        <div>
-          <p class="eyebrow">Page scan</p>
-          <h1>Gambling Detector</h1>
+        <div class="header-left">
+          <img src="../logo.png" alt="Logo" class="logo" width="32" height="32">
+          <div>
+            <h1>Gambling Detector</h1>
+            <p class="subtitle" id="engineLabel">Combined Analysis</p>
+          </div>
         </div>
         <label class="switch" title="Enable or disable detector">
           <input id="enabledToggle" type="checkbox">
@@ -19,33 +22,87 @@
         </label>
       </header>
 
+      <!-- Combined Risk Gauge -->
       <section id="statusCard" class="status-card low">
-        <span id="riskLabel" class="risk-label">Scanning</span>
-        <strong id="scoreValue">-</strong>
-        <p id="statusText">Reading the active tab...</p>
+        <div class="gauge-row">
+          <div class="gauge-wrap">
+            <svg class="gauge" viewBox="0 0 120 120">
+              <circle class="gauge-bg" cx="60" cy="60" r="52" />
+              <circle class="gauge-fill" id="gaugeFill" cx="60" cy="60" r="52" />
+            </svg>
+            <div class="gauge-center">
+              <strong id="scoreValue">0</strong>
+              <span>score</span>
+            </div>
+          </div>
+          <div class="status-info">
+            <span id="riskLabel" class="risk-label">Scanning</span>
+            <p id="statusText">Reading the active tab...</p>
+            <p class="hostname" id="hostnameText"></p>
+          </div>
+        </div>
       </section>
 
-      <section class="details">
-        <div>
-          <span>Matches</span>
-          <strong id="matchCount">-</strong>
+      <!-- Metrics -->
+      <section class="metrics">
+        <div class="metric-card">
+          <span class="metric-icon">&#128279;</span>
+          <div>
+            <span class="metric-title">URL Score</span>
+            <strong id="urlScoreValue">0</strong>
+          </div>
         </div>
-        <div>
-          <span>Sensitivity</span>
-          <strong id="sensitivityValue">-</strong>
+        <div class="metric-card">
+          <span class="metric-icon">&#128196;</span>
+          <div>
+            <span class="metric-title">Content</span>
+            <strong id="contentScoreValue">0</strong>
+          </div>
+        </div>
+        <div class="metric-card">
+          <span class="metric-icon">&#9889;</span>
+          <div>
+            <span class="metric-title">Confidence</span>
+            <strong id="confidenceValue">0%</strong>
+          </div>
         </div>
       </section>
 
-      <section>
-        <h2>Top terms</h2>
-        <ul id="termsList" class="terms-list">
-          <li>No matches yet.</li>
+      <!-- URL Analysis Section -->
+      <section class="analysis-section">
+        <div class="section-header">
+          <h2>&#128279; URL Analysis</h2>
+          <span id="urlRiskPill" class="mini-pill low">LOW</span>
+        </div>
+        <ul id="urlSignalsList" class="signals-list">
+          <li class="signals-empty">No URL signals detected.</li>
         </ul>
       </section>
 
+      <!-- Content Analysis Section -->
+      <section class="analysis-section">
+        <div class="section-header">
+          <h2>&#128196; Content Analysis</h2>
+          <span id="contentRiskPill" class="mini-pill low">LOW</span>
+        </div>
+        <ul id="termsList" class="terms-list">
+          <li class="terms-empty">No content matches.</li>
+        </ul>
+      </section>
+
+      <!-- URL Features (collapsible) -->
+      <details class="features-panel">
+        <summary>Feature Vector (21 features)</summary>
+        <div id="featuresGrid" class="features-grid"></div>
+      </details>
+
       <footer class="actions">
-        <button id="rescanButton" type="button">Rescan</button>
-        <button id="optionsButton" type="button" class="secondary">Options</button>
+        <button id="rescanButton" type="button">
+          <span class="btn-icon">&#8635;</span> Rescan
+        </button>
+        <button id="optionsButton" type="button" class="secondary">
+          <span class="btn-icon">&#9881;</span> Options
+        </button>
       </footer>
     </main>
 

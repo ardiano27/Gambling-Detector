@@ -29,8 +29,11 @@ chrome.runtime.onMessage.addListener((message, sender) => {
     return;
   }
 
+  const payload = message.payload;
+  const riskLevel = payload.combined ? payload.combined.riskLevel : "low";
+
   const result = {
-    ...message.payload,
+    ...payload,
     tabId,
     scannedAt: new Date().toISOString()
   };
@@ -40,10 +43,10 @@ chrome.runtime.onMessage.addListener((message, sender) => {
     [`scan:${tabId}`]: result
   });
 
-  if (result.riskLevel === "high") {
+  if (riskLevel === "high") {
     chrome.action.setBadgeText({ tabId, text: "!" });
     chrome.action.setBadgeBackgroundColor({ tabId, color: BADGE_COLORS.high });
-  } else if (result.riskLevel === "medium") {
+  } else if (riskLevel === "medium") {
     chrome.action.setBadgeText({ tabId, text: "?" });
     chrome.action.setBadgeBackgroundColor({ tabId, color: BADGE_COLORS.medium });
   } else {
