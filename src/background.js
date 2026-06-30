@@ -12,7 +12,7 @@ chrome.runtime.onInstalled.addListener(async () => {
         enabled: true,
         sensitivity: "medium",
         highlight: true,
-        blockOverlay: false,
+        blockOverlay: true,
         customKeywords: []
       }
     });

@@ -10,102 +10,98 @@
     <main class="popup">
       <header class="header">
         <div class="header-left">
-          <img src="../logo.png" alt="Logo" class="logo" width="32" height="32">
+          <img src="../logo.png" alt="" class="logo" width="28" height="28">
           <div>
             <h1>Gambling Detector</h1>
             <p class="subtitle" id="engineLabel">Combined Analysis</p>
           </div>
         </div>
-        <label class="switch" title="Enable or disable detector">
+        <label class="toggle" title="Enable / disable">
           <input id="enabledToggle" type="checkbox">
-          <span></span>
+          <span class="toggle-track"><span class="toggle-knob"></span></span>
         </label>
       </header>
 
-      <!-- Combined Risk Gauge -->
-      <section id="statusCard" class="status-card low">
-        <div class="gauge-row">
-          <div class="gauge-wrap">
-            <svg class="gauge" viewBox="0 0 120 120">
-              <circle class="gauge-bg" cx="60" cy="60" r="52" />
-              <circle class="gauge-fill" id="gaugeFill" cx="60" cy="60" r="52" />
+      <section id="statusCard" class="card-risk low">
+        <div class="risk-row">
+          <div class="gauge">
+            <svg viewBox="0 0 120 120">
+              <circle class="gauge-track" cx="60" cy="60" r="52"/>
+              <circle class="gauge-value" id="gaugeFill" cx="60" cy="60" r="52"/>
             </svg>
-            <div class="gauge-center">
+            <div class="gauge-label">
               <strong id="scoreValue">0</strong>
               <span>score</span>
             </div>
           </div>
-          <div class="status-info">
-            <span id="riskLabel" class="risk-label">Scanning</span>
-            <p id="statusText">Reading the active tab...</p>
-            <p class="hostname" id="hostnameText"></p>
+          <div class="risk-info">
+            <span id="riskLabel" class="pill">Scanning</span>
+            <p id="statusText" class="risk-desc">Reading the active tab&hellip;</p>
+            <p id="hostnameText" class="risk-host"></p>
           </div>
         </div>
       </section>
 
-      <!-- Metrics -->
-      <section class="metrics">
-        <div class="metric-card">
-          <span class="metric-icon">&#128279;</span>
-          <div>
-            <span class="metric-title">URL Score</span>
-            <strong id="urlScoreValue">0</strong>
-          </div>
+      <div class="stat-row">
+        <div class="stat">
+          <svg class="stat-icon" viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm0 2a6 6 0 0 1 5.29 8.8l-4.16-4.16a1 1 0 0 0-1.42 0L5.55 12.8A6 6 0 0 1 10 4Z" fill="currentColor"/></svg>
+          <div><span class="stat-title">URL</span><strong id="urlScoreValue">0</strong></div>
         </div>
-        <div class="metric-card">
-          <span class="metric-icon">&#128196;</span>
-          <div>
-            <span class="metric-title">Content</span>
-            <strong id="contentScoreValue">0</strong>
-          </div>
+        <div class="stat">
+          <svg class="stat-icon" viewBox="0 0 20 20" fill="none"><path d="M4 4h12a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm1 3v2h10V7H5Zm0 4v2h6v-2H5Z" fill="currentColor"/></svg>
+          <div><span class="stat-title">Content</span><strong id="contentScoreValue">0</strong></div>
         </div>
-        <div class="metric-card">
-          <span class="metric-icon">&#9889;</span>
-          <div>
-            <span class="metric-title">Confidence</span>
-            <strong id="confidenceValue">0%</strong>
-          </div>
+        <div class="stat">
+          <svg class="stat-icon" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.09 6.26H18l-4.77 3.48L14.82 18 10 14.27 5.18 18l1.59-6.26L2 8.26h5.91L10 2Z" fill="currentColor"/></svg>
+          <div><span class="stat-title">Confidence</span><strong id="confidenceValue">0%</strong></div>
         </div>
-      </section>
+      </div>
 
-      <!-- URL Analysis Section -->
-      <section class="analysis-section">
-        <div class="section-header">
-          <h2>&#128279; URL Analysis</h2>
-          <span id="urlRiskPill" class="mini-pill low">LOW</span>
+      <section class="panel">
+        <div class="panel-head">
+          <div class="panel-title">
+            <svg class="panel-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1a1 1 0 0 1 .71.29l6 6a1 1 0 0 1 0 1.42l-6 6a1 1 0 0 1-1.42 0l-6-6a1 1 0 0 1 0-1.42l6-6A1 1 0 0 1 8 1Z" fill="currentColor" opacity=".15"/><path d="M8 5v3m0 2h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            URL Analysis
+          </div>
+          <span id="urlRiskPill" class="pill-sm low">LOW</span>
         </div>
-        <ul id="urlSignalsList" class="signals-list">
-          <li class="signals-empty">No URL signals detected.</li>
+        <ul id="urlSignalsList" class="list-signals">
+          <li class="list-empty">No URL signals detected.</li>
         </ul>
       </section>
 
-      <!-- Content Analysis Section -->
-      <section class="analysis-section">
-        <div class="section-header">
-          <h2>&#128196; Content Analysis</h2>
-          <span id="contentRiskPill" class="mini-pill low">LOW</span>
+      <section class="panel">
+        <div class="panel-head">
+          <div class="panel-title">
+            <svg class="panel-icon" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" fill="currentColor" opacity=".15"/><path d="M5 6h6M5 8h6M5 10h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Content Analysis
+          </div>
+          <span id="contentRiskPill" class="pill-sm low">LOW</span>
         </div>
-        <ul id="termsList" class="terms-list">
-          <li class="terms-empty">No content matches.</li>
+        <ul id="termsList" class="list-terms">
+          <li class="list-empty">No content matches.</li>
         </ul>
       </section>
 
-      <!-- URL Features (collapsible) -->
-      <details class="features-panel">
-        <summary>Feature Vector (21 features)</summary>
-        <div id="featuresGrid" class="features-grid"></div>
+      <details class="panel-collapse">
+        <summary>
+          <svg class="panel-icon" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity=".25"/><rect x="9" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity=".25"/><rect x="1" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity=".25"/><rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity=".25"/></svg>
+          Feature Vector <span class="feat-count">21 features</span>
+        </summary>
+        <div id="featuresGrid" class="feat-grid"></div>
       </details>
 
-      <footer class="actions">
+      <footer class="footer">
         <button id="rescanButton" type="button">
-          <span class="btn-icon">&#8635;</span> Rescan
+          <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M2 8a6 6 0 0 1 10.89-3.48M14 8a6 6 0 0 1-10.89 3.48" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M13 2v3h-3M3 14v-3h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Rescan
         </button>
-        <button id="optionsButton" type="button" class="secondary">
-          <span class="btn-icon">&#9881;</span> Options
+        <button id="optionsButton" type="button" class="btn-ghost">
+          <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M8 1v2m0 10v2M1 8h2m10 0h2m-2.05-4.95-1.41 1.41M4.46 11.54l-1.41 1.41m0-9.9 1.41 1.41m7.08 7.08 1.41 1.41" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          Options
         </button>
       </footer>
     </main>
-
     <script src="popup.js"></script>
   </body>
 </html>
